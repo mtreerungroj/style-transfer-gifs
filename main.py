@@ -1,5 +1,5 @@
 import numpy as np
-import scipy.misc
+# import scipy.misc
 
 from PIL import Image
 import imageio
@@ -11,8 +11,8 @@ import tensorflow.contrib.eager as tfe
 from tensorflow.python.keras.preprocessing import image as kp_image
 from tensorflow.python.keras import models
 
-tf.enable_eager_execution()
-
+# tf.enable_eager_execution()
+tf.compat.v1.enable_eager_execution()
 
 def load_img(path_to_img):
     max_dim = 512
@@ -271,7 +271,8 @@ def run_style_transfer(content_path,
                   'content loss: {:.4e}, '
                   'time: {:.4f}s'.format(loss, style_score, content_score, time.time() - start_time))
             filename = 'output/{}_{}_{}_of_{}.jpg'.format(output, style, imgs, num_images)
-            scipy.misc.imsave(filename, plot_img)
+            imageio.imwrite(filename, plot_img)
+            # scipy.misc.imsave(filename, plot_img)
             filenames.append(filename)
             imgs += 1
 
